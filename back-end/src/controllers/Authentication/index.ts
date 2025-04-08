@@ -19,6 +19,23 @@ const signUp = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const login = async (req: Request, res: Response): Promise<any> => {
+    const { email, password } = req.body as UserDTO;
+
+    try {
+        const login = await authService.login(email, password);
+        return res.status(200).json(login);
+    } catch (error) {
+        if(error instanceof AppError) {
+            return res.status(error.statusCode).json({message: error.message});
+        }
+
+        console.error("Error on user login: ", error);
+        return res.status(500).json({message: "Internal server error!"});
+    }
+}
+
 export const authController = {
     signUp,
+    login,
 }

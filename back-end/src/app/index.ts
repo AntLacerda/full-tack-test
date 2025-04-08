@@ -9,10 +9,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const basePathUrlApiV1 = "api/v1";
+const basePathUrlApiV1 = "/api/v1";
 
-app.get(`${basePathUrlApiV1}/hello`, (req: Request, res: Response) => {
-    res.status(200).json({message: "Hello World!"});
+app.get(`${basePathUrlApiV1}/hello-world`, (req: Request, res: Response) => {
+    res.status(200).json({ message: "Hello World" });
     return;
 });
 

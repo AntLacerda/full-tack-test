@@ -51,6 +51,37 @@ const signUp = async (newUser: UserDTO) => {
     return userResponse;
 }
 
+const login = async (email: string, password: string) => {
+    const user = await User.findUnique({
+        where: {
+            email,
+        }
+    });
+
+    if(!user) {
+        throw new AppError("User not found!", 404);
+    }
+
+    const isValidPassword = await compareHashWithPassword(password, user.password);
+
+    if(!isValidPassword) {
+        throw new AppError("Invalid password!", 401);
+    }
+
+    const token = sign({
+        id: user.id,
+        email: user.email,  
+    }, process.env.KEY_SECRET || "secret", {
+        expiresIn: "1d",
+    });
+
+    return {
+        userId: user.id,
+        token,
+    }
+}
+
 export const authService = {
     signUp,
+    login,
 }
