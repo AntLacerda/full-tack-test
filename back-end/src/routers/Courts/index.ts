@@ -7,5 +7,6 @@ const courtsRouter = Router();
 
 courtsRouter.post("/save", authentication, authorization, courtController.createCourt);
 courtsRouter.get("/", authentication, courtController.findAllCourts);
+courtsRouter.get("/:id", authentication, courtController.findById);
 
 export default courtsRouter;

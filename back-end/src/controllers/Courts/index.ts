@@ -35,7 +35,24 @@ const findAllCourts = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const findById = async (req: Request, res: Response): Promise<any> => {
+    const id = req.params.id;
+
+    try {
+        const court = await courtService.findById(id);
+        return res.status(200).json(court);
+    } catch (error) {
+        if(error instanceof AppError) {
+            return res.status(error.statusCode).json({message: error.message});
+        }
+
+        console.error("Error on find court by id: ", error);
+        return res.status(500).json({message: "Internal server error!"});
+    }
+}
 export const courtController = {
     createCourt,
-    findAllCourts
+    findAllCourts,
+    findById,
+    
 }

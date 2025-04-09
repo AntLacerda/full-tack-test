@@ -47,7 +47,29 @@ const findAllCourts = async (available: boolean) => {
     });
 }
 
+const findById = async (id: string) => {
+    const court = await Courts.findUnique({
+        where: {
+            id,
+        },
+        select: {
+            id: true,
+            name: true,
+            location: true,
+            available: true
+        }
+    });
+
+    if(!court) {
+        throw new AppError("Court not found!", 404);
+    }
+
+    return court;
+}
+
 export const courtService = {
     createCourt,
     findAllCourts,
+    findById,
+    
 }
