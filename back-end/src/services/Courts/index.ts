@@ -137,11 +137,36 @@ const updateAvailability = async (id: string) => {
     return updatedCourt;
 }
 
+const remove = async (id: string) => {
+    const courtExists = await Courts.findUnique({
+        where: {
+            id,
+        }
+    });
+
+    if(!courtExists) {
+        throw new AppError("Court not found!", 404);
+    }
+
+    const deletedCourt = await Courts.delete({
+        where: {
+            id,
+        }
+    });
+
+    if(!deletedCourt) {
+        throw new AppError("Error on try to delete a court!", 500);
+    }
+
+    return "Court deleted successfully!";
+}
+
 export const courtService = {
     createCourt,
     findAllCourts,
     findById,
     update,
     updateAvailability,
+    remove,
     
 }

@@ -10,5 +10,6 @@ courtsRouter.get("/", authentication, courtController.findAllCourts);
 courtsRouter.get("/:id", authentication, courtController.findById);
 courtsRouter.put("/:id", authentication, authorization, courtController.update);
 courtsRouter.patch("/:id/availability", authentication, authorization, courtController.updateAvailability);
+courtsRouter.delete("/:id", authentication, authorization, courtController.remove);
 
 export default courtsRouter;
