@@ -19,6 +19,23 @@ const createCourt = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const findAllCourts = async (req: Request, res: Response): Promise<any> => {
+    const available = req.query.available;
+
+    try {
+        const courts = await courtService.findAllCourts(available === "true" ? true : false);
+        return res.status(200).json(courts);
+    } catch (error) {
+        if(error instanceof AppError) {
+            return res.status(error.statusCode).json({message: error.message});
+        }
+    
+        console.error("Error on find all courts: ", error);
+        return res.status(500).json({message: "Internal server error!"});
+    }
+}
+
 export const courtController = {
     createCourt,
+    findAllCourts
 }

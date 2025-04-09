@@ -22,7 +22,32 @@ const createCourt = async (newCourt: CourtsDTO) => {
     return courtResponse;
 }
 
+const findAllCourts = async (available: boolean) => {
+    if(available) {
+        return await Courts.findMany({
+            where: {
+                available
+            },
+            select: {
+                id: true,
+                name: true,
+                location: true,
+                available: true
+            }
+        })
+    }
+
+    return await Courts.findMany({
+        select: {
+            id: true,
+            name: true,
+            location: true,
+            available: true
+        }
+    });
+}
+
 export const courtService = {
     createCourt,
-    
+    findAllCourts,
 }

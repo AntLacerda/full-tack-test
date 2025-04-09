@@ -6,5 +6,6 @@ import { authentication } from "../../middlewares/Authentication";
 const courtsRouter = Router();
 
 courtsRouter.post("/save", authentication, authorization, courtController.createCourt);
+courtsRouter.get("/", authentication, courtController.findAllCourts);
 
 export default courtsRouter;
