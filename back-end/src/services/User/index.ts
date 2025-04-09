@@ -7,6 +7,16 @@ import { UserDTO } from "../../dtos/User";
 const createAdminUser = async (newUser: UserDTO) => {
     const { name, email, password } = newUser;
 
+    const userExists = await User.findUnique({
+        where: {
+            email,
+        }
+    });
+
+    if(userExists) {
+        throw new AppError("User already exists!", 409);
+    }
+
     const userPermission = await Permission.findFirst({
         where: {
             role: "admin",
