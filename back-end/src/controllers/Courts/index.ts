@@ -50,9 +50,28 @@ const findById = async (req: Request, res: Response): Promise<any> => {
         return res.status(500).json({message: "Internal server error!"});
     }
 }
+
+const update = async (req: Request, res: Response): Promise<any> => {
+    const id = req.params.id;
+    const { name, location, available } = req.body as CourtsDTO;
+
+    try {
+        const updatedCourt = await courtService.update(id, { name, location, available });
+        return res.status(200).json(updatedCourt);
+    } catch (error) {
+        if(error instanceof AppError) {
+            return res.status(error.statusCode).json({message: error.message});
+        }
+
+        console.error("Error on update court: ", error);
+        return res.status(500).json({message: "Internal server error!"});
+    }
+}
+
 export const courtController = {
     createCourt,
     findAllCourts,
     findById,
+    update,
     
 }

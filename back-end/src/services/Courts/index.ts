@@ -67,9 +67,47 @@ const findById = async (id: string) => {
     return court;
 }
 
+const update = async (id: string, courtToUpdate: CourtsDTO) => {
+    const { name, location, available } = courtToUpdate;
+
+    const courtExists = await Courts.findUnique({
+        where: {
+            id,
+        }
+    });
+
+    if(!courtExists) {
+        throw new AppError("Court not found!", 404);
+    }
+
+    const updatedCourt = await Courts.update({
+        where: {
+            id,
+        },
+        data: {
+            name,
+            location,
+            available
+        },
+        select: {
+            id: true,
+            name: true,
+            location: true,
+            available: true
+        }
+    });
+
+    if(!updatedCourt) {
+        throw new AppError("Error on try to update a court!", 500);
+    }
+
+    return updatedCourt;
+}
+
 export const courtService = {
     createCourt,
     findAllCourts,
     findById,
+    update,
     
 }
