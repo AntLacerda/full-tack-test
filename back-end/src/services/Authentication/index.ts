@@ -44,7 +44,11 @@ const signUp = async (newUser: UserDTO) => {
             id: true,
             name: true,
             email: true,
-            permission_id: true,
+            Permission: {
+                select: {
+                    role: true,
+                }
+            }
         }
     });
 
