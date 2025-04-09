@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 
 import authRouter from "../routers/Authentication";
+import userRouter from "../routers/User";
 
 
 const app = express();
@@ -17,5 +18,6 @@ app.get(`${basePathUrlApiV1}/hello-world`, (req: Request, res: Response) => {
 });
 
 app.use("/auth", authRouter);
+app.use(`${basePathUrlApiV1}/users`, userRouter);
 
 export default app;
