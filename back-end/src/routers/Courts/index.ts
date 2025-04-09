@@ -9,5 +9,6 @@ courtsRouter.post("/save", authentication, authorization, courtController.create
 courtsRouter.get("/", authentication, courtController.findAllCourts);
 courtsRouter.get("/:id", authentication, courtController.findById);
 courtsRouter.put("/:id", authentication, authorization, courtController.update);
+courtsRouter.patch("/:id/availability", authentication, authorization, courtController.updateAvailability);
 
 export default courtsRouter;
