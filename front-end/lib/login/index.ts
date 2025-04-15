@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 export async function login(email: string, password: string) {
     try {
         const response = await fetch("http://localhost:3001/auth/login", {
@@ -14,7 +16,11 @@ export async function login(email: string, password: string) {
             throw new Error(data.message || "Um erro inesperado aconteceu, tente novamente mais tarde!");
         }
 
-        return data;
+        const { userId, token } = data;
+
+        Cookies.set("token", token, { expires: 7, secure: true });
+
+        return { userId, token };
     } catch (error) {
         throw new Error(error instanceof Error ? error.message : "Um erro inesperado aconteceu, tente novamente mais tarde!");
     }
