@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { login } from "@/lib/login"
 import { EyeIcon, EyeSlashIcon  } from '@heroicons/react/24/outline'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid'
+import Cookies from "js-cookie";
 
 const loginSchema = z.object({
     email: z.string().email("E-mail inválido"),
@@ -30,7 +31,9 @@ export default function LoginForm() {
         setFeedbackType(null);
 
         try {
-            await login(data.email, data.password);
+            const { token } = await login(data.email, data.password);
+
+            Cookies.set("token", token, { expires: 7, secure: true });
 
             setFeedbackType("sucess");
             setFeedbackMessage("Logado com sucesso!");
