@@ -1,6 +1,6 @@
-export default async function signup(name: string, email: string, password: string) {
+export default async function signup(name: string, email: string, password: string, adminAccount: boolean) {
     try {
-        const response = await fetch("http://localhost:3001/auth/signup", {
+        const response = await fetch(`${adminAccount ? "http://localhost:3001/api/v1/users/save" : "http://localhost:3001/auth/signup"}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

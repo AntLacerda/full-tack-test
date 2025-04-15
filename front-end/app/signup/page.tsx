@@ -10,7 +10,7 @@ export default function Signup() {
                 <div className=" flex flex-row justify-center items-center w-1/2 h-full ">
                     <div className="flex flex-col justify-center items-center bg-white w-3/4 h-9/10 rounded-2xl">
                         <div className="flex flex-col justify-center items-center p-3">
-                            <Image src={logo} alt="logo" className="w-22"/>
+                            <Image src={logo} alt="logo" className="w-18"/>
                             <h2 className="text-5xl font-extrabold">Criar Conta</h2>
                             <p>Crie sua conta para acessar nosso sistema!</p>
                             

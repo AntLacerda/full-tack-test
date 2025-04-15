@@ -15,6 +15,7 @@ const signupSchema = z.object({
     email: z.string().email("E-mail inválido"),
     password: z.string().min(6, "Senha deve conter pelo menos 6 caracteres"),
     confirmPassword: z.string().min(6, "Senha deve conter pelo menos 6 caracteres"),
+    adminAccount: z.boolean(),
 });
 
 type SignupFormData = z.infer<typeof signupSchema>;
@@ -39,7 +40,7 @@ export default function SignUpForm() {
         setFeedbackType(null);
 
         try {
-            await signup(data.name, data.email, data.password);
+            await signup(data.name, data.email, data.password, data.adminAccount);
 
             setFeedbackType("sucess");
             setFeedbackMessage("Cadastrado com sucesso!");
@@ -129,6 +130,11 @@ export default function SignUpForm() {
                 </div>
 
                 {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
+            </div>
+
+            <div className="flex flex-row items-center gap-2 mt-1.5">
+                <input type="checkbox" id="checkbox" className="w-4 h-4" {...register("adminAccount")}/>
+                <label htmlFor="checkbox">Cadastrar como admninistrador?</label>
             </div>
 
             <button type="submit" className="bg-[#629764] w-full text-white rounded-md p-2 mt-3 font-bold mb-1.5 hover:cursor-pointer" disabled={isSubmitting}>{isSubmitting ? "Cadastrando..." : "Cadastrar"}</button>
