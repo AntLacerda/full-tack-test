@@ -5,6 +5,6 @@ import { authentication } from "../../middlewares/Authentication";
 
 const userRouter = Router();
 
-userRouter.post("/save", authentication, authorizarion, userController.createAdminUser);
+userRouter.post("/save", userController.createAdminUser); //removido temporariamente para poder criar adm pela tela do front
 
 export default userRouter;

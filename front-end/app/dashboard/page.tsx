@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import logo from "../../public/images/logo.png";
 import { findAllCourts } from "@/lib/dashboard";
+import CourtCard from "@/components/dashboard/court-card";
 
 interface DecodedToken {
     name: string;
@@ -54,11 +55,9 @@ export default function Dashboard() {
             <main className="w-full flex flex-col p-6">
                 <h1 className="text-5xl font-bold mb-3">Quadras</h1>
                 <p>Escolha a quadra que você preferir e divirta-se!</p>
-                <div>
+                <div className="flex flex-row flex-wrap mt-4 gap-8">
                     {courts.map((court) => (
-                        <div key={court.id} className="flex flex-row justify-center items-center p-3 bg-[#629764] rounded-2xl mb-3">
-                            <p>{court.name}</p>
-                        </div>
+                        <CourtCard key={court.id} id={court.id} name={court.name} location={court.location} available={court.available} />
                     ))}
                 </div>
             </main>

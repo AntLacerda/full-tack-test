@@ -59,6 +59,16 @@ const login = async (email: string, password: string) => {
     const user = await User.findUnique({
         where: {
             email,
+        },
+        select: {
+            id: true,
+            email: true,
+            password: true,
+            Permission: {
+                select: {
+                    role: true,
+                }
+            }
         }
     });
 
@@ -74,7 +84,8 @@ const login = async (email: string, password: string) => {
 
     const token = sign({
         id: user.id,
-        email: user.email,  
+        email: user.email,
+        role: user.Permission.role,
     }, process.env.KEY_SECRET || "secret", {
         expiresIn: "1d",
     });
