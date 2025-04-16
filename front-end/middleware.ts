@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
     const isAuthRoute = ["/login", "/signup", "/"].includes(request.nextUrl.pathname);
 
     if(token && isAuthRoute) {
-        return NextResponse.redirect(new URL("/home", request.url));
+        return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 
     if(!token && !isAuthRoute) {

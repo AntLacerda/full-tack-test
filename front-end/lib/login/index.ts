@@ -1,4 +1,11 @@
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+
+interface DecodedToken {
+    sub: string;
+    email: string;
+    role: 'admin' | 'user';
+}
 
 export async function login(email: string, password: string) {
     try {
@@ -18,7 +25,10 @@ export async function login(email: string, password: string) {
 
         const { userId, token } = data;
 
+
+
         Cookies.set("token", token, { expires: 7, secure: true });
+
 
         return { userId, token };
     } catch (error) {
