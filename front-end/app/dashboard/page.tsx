@@ -7,6 +7,7 @@ import Image from "next/image";
 import logo from "../../public/images/logo.png";
 import { findAllCourts } from "@/lib/dashboard";
 import CourtCard from "@/components/dashboard/court-card";
+import Link from "next/link";
 
 interface DecodedToken {
     name: string;
@@ -75,21 +76,29 @@ export default function Dashboard() {
                 <h1 className="text-5xl font-bold mb-3">Quadras</h1>
                 <p>Escolha a quadra que você preferir e divirta-se!</p>
 
-                <div className="flex items-center gap-2 mt-4">
-                    <input
-                        type="text"
-                        placeholder="Digite o nome da quadra..."
-                        className="border border-gray-300 px-4 py-2 rounded-md w-full max-w-sm"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <button
-                        onClick={handleSearch}
-                        className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
-                    >
-                        Pesquisar
-                    </button>
+                <div className="flex flex-row justify-between">
+                    <div className="flex items-center gap-2 mt-4">
+                        <input
+                            type="text"
+                            placeholder="Digite o nome da quadra..."
+                            className="border border-gray-300 px-4 py-2 rounded-md w-full max-w-sm"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <button
+                            onClick={handleSearch}
+                            className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
+                        >
+                            Pesquisar
+                        </button>
+                    </div>
+
+                    <Link href={"/court/create"}>
+                        <button className="bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer">Criar Quadra</button>
+                    </Link>
+
                 </div>
+
 
                 <div className="flex items-center gap-2 my-4">
                     <span>Mostrar apenas disponíveis</span>

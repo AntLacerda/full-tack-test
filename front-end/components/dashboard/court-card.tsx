@@ -1,6 +1,7 @@
 import { Court } from "@/types/courts"
 import Image from "next/image"
 import { handleAvailability } from "@/lib/dashboard";
+import Link from "next/link";
 
 interface CourtCardProps {
     id: string;
@@ -28,11 +29,13 @@ export default function CourtCard({ id, name, location, available, role }: Court
                 role === "admin" &&
                 <div className="flex flex-col ">
                     <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `} onClick={() => handleAvailableChange(id)}>Alterar Disponibilidade</button>
-                    <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `}>Editar</button>
+                    <Link href={`/court/edit/${id}`}>
+                        <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `}>Editar</button>
+                    </Link>
                 </div>
             }
 
-            <button className={`w-2/3 bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer ${!available ? "hidden" : ""}`}>Reservar</button>
+            <button className={`w-2/3 bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer ${!available ? "hidden" : ""}`} onClick={() => alert("Funcionalidade em desenvolvimento")}>Reservar</button>
         </div>
     )
 }
