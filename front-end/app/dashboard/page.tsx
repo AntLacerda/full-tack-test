@@ -91,9 +91,6 @@ export default function Dashboard() {
                     </button>
                 </div>
 
-
-
-
                 <div className="flex items-center gap-2 my-4">
                     <span className="text-sm font-medium">Mostrar apenas disponíveis</span>
                     <button
@@ -112,7 +109,7 @@ export default function Dashboard() {
 
                 <div className="flex flex-row flex-wrap mt-4 gap-8">
                     {filteredCourts.map((court) => (
-                        <CourtCard key={court.id} id={court.id} name={court.name} location={court.location} available={court.available} />
+                        <CourtCard key={court.id} id={court.id} name={court.name} location={court.location} available={court.available} role={role} />
                     ))}
                 </div>
             </main>
