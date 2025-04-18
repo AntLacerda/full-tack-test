@@ -92,7 +92,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="flex items-center gap-2 my-4">
-                    <span className="text-sm font-medium">Mostrar apenas disponíveis</span>
+                    <span>Mostrar apenas disponíveis</span>
                     <button
                         onClick={() => setShowAvailableOnly((prev) => !prev)}
                         className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${
