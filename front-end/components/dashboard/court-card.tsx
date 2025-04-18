@@ -1,7 +1,13 @@
+"use client"
+
+import { useState } from "react";
+import { useEffect } from "react";
 import { Court } from "@/types/courts"
 import Image from "next/image"
 import { handleAvailability } from "@/lib/dashboard";
+import { removeCourt } from "@/lib/court";
 import Link from "next/link";
+import { set } from "react-hook-form";
 
 interface CourtCardProps {
     id: string;
@@ -13,6 +19,12 @@ interface CourtCardProps {
 
 const handleAvailableChange = async (id: string) => {
     await handleAvailability(id);
+    window.location.reload();
+}
+
+const handleRemoveCourt = async (id: string) => {
+    const response = await removeCourt(id);
+    alert(response);
     window.location.reload();
 }
 
@@ -29,9 +41,14 @@ export default function CourtCard({ id, name, location, available, role }: Court
                 role === "admin" &&
                 <div className={`flex flex-col ${role === "admin" ? "" : "hidden"} `}>
                     <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `} onClick={() => handleAvailableChange(id)}>Alterar Disponibilidade</button>
-                    <Link href={`/court/edit/${id}`}>
-                        <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `}>Editar</button>
-                    </Link>
+                    
+                    <div className="w-full flex flex-row justify-between gap-1.5">
+                        <Link href={`/court/edit/${id}`} className="w-1/2">
+                            <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `}>Editar</button>
+                        </Link>
+                        <button className={`w-1/2 bg-[#EC7575] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `} onClick={() => handleRemoveCourt(id)}>Excluir</button>
+                    </div>
+
                 </div>
             }
 
