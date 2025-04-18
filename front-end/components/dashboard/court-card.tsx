@@ -27,7 +27,7 @@ export default function CourtCard({ id, name, location, available, role }: Court
 
             {
                 role === "admin" &&
-                <div className="flex flex-col ">
+                <div className={`flex flex-col ${role === "admin" ? "" : "hidden"} `}>
                     <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `} onClick={() => handleAvailableChange(id)}>Alterar Disponibilidade</button>
                     <Link href={`/court/edit/${id}`}>
                         <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `}>Editar</button>

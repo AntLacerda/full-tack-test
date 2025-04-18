@@ -93,7 +93,7 @@ export default function Dashboard() {
                         </button>
                     </div>
 
-                    <Link href={"/court/create"}>
+                    <Link href={"/court/create"} className={`${role === "admin" ? "" : "hidden"}`}>
                         <button className="bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer">Criar Quadra</button>
                     </Link>
 
