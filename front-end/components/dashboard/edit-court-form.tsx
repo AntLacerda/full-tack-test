@@ -1,28 +1,57 @@
 "use client";
 
 import { useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter, useParams } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
-import { createCourt } from "@/lib/court";
-
+import { editCourt, findCourtById } from "@/lib/court";
+import { Court } from "@/types/courts";
 
 const createCourtSchema = z.object({
     name: z.string().min(3, "Nome deve conter pelo menos 3 caracteres"),
     address: z.string().min(3, "Endereço deve conter pelo menos 3 caracteres"),
-    available: z.boolean(),
+    available: z.boolean().optional(),
 });
 
 type CreateCourtFormData = z.infer<typeof createCourtSchema>;
 
-export default function CreateCourtForm() {
+
+
+export default function EditCourtForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
     const [feedbackType, setFeedbackType] = useState<"sucess" | "error" | null>(null);
-    const { register, handleSubmit, formState: { errors}} = useForm<CreateCourtFormData>({resolver: zodResolver(createCourtSchema)});
+    const { register, handleSubmit, formState: { errors}, reset} = useForm<CreateCourtFormData>({resolver: zodResolver(createCourtSchema), defaultValues: {name: "", address: "", available: false}});
+    const [atualCourt, setAtualCourt] = useState<Court | null>(null);
     const router = useRouter();
+    const params = useParams();
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const court = await findCourtById(params.id as string);
+
+                if(court) {
+                    setAtualCourt(court);
+                    reset({
+                        name: court.name,
+                        address: court.location,
+                        available: court.available
+                    });
+                } else {
+                    notFound();
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                notFound();
+            }
+        }
+
+        fetchData();
+    }, [params.id, reset])
 
     const onSubmit = async (data: CreateCourtFormData) => {
         setIsSubmitting(true);
@@ -30,10 +59,10 @@ export default function CreateCourtForm() {
         setFeedbackType(null);
 
         try {
-            await createCourt(data.name, data.address, data.available);
-
+            await editCourt(atualCourt?.id as string, data.name, data.address, data.available as boolean);
+            
             setFeedbackType("sucess");
-            setFeedbackMessage("Quadra criada com sucesso!");
+            setFeedbackMessage("Quadra editada com sucesso!");
             
             setTimeout(() => {
                 router.push("/dashboard");
@@ -45,6 +74,7 @@ export default function CreateCourtForm() {
 
         setIsSubmitting(false);
     }
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-1/3 flex flex-col gap-2">
@@ -66,7 +96,7 @@ export default function CreateCourtForm() {
                     {...register("name")}
                     type="text"
                     id="name"
-                    placeholder="Digite o nome da quadra..."
+                    placeholder={atualCourt?.name}
                     className="border-2 rounded-md p-2 mt-1.5 pl-5 border-gray-300"
                 />
 
@@ -80,7 +110,7 @@ export default function CreateCourtForm() {
                     {...register("address")}
                     type="text"
                     id="address"
-                    placeholder="Digite o endereço da quadra..."
+                    placeholder={atualCourt?.location}
                     className="border-2 rounded-md p-2 mt-1.5 pl-5 border-gray-300"
                 />
 
@@ -88,11 +118,11 @@ export default function CreateCourtForm() {
             </div>
 
             <div className="flex flex-row items-center gap-2 mt-1.5">
-                <input type="checkbox" id="checkbox" className="w-4 h-4" {...register("available")}/>
-                <label htmlFor="checkbox">Cadastrar como disponível?</label>
+                <input type="checkbox" id="checkbox" className="w-4 h-4" {...register("available")} />
+                <label htmlFor="checkbox">Quadra está disponível?</label>
             </div>
 
-            <button type="submit" className="bg-[#629764] w-full text-white rounded-md p-2 mt-3 font-bold mb-1.5 hover:cursor-pointer" disabled={isSubmitting}>{isSubmitting ? "Cadastrando..." : "Cadastrar"}</button>
+            <button type="submit" className="bg-[#629764] w-full text-white rounded-md p-2 mt-3 font-bold mb-1.5 hover:cursor-pointer" disabled={isSubmitting}>{isSubmitting ? "Editando..." : "Editar"}</button>
         </form>
     )
 }
