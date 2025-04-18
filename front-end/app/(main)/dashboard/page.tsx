@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
-import Image from "next/image";
-import logo from "../../public/images/logo.png";
+
+
 import { findAllCourts } from "@/lib/dashboard";
 import CourtCard from "@/components/dashboard/court-card";
 import Link from "next/link";
@@ -68,10 +68,8 @@ export default function Dashboard() {
     };
     
     return (
-        <div className="w-full h-screen">
-            <header className="flex flex-row justify-center items-center p-3 bg-[#629764]">
-                <Image src={logo} alt="logo" className="w-18"/>
-            </header>
+        <div className="w-full">
+
             <main className="w-full flex flex-col p-6">
                 <h1 className="text-5xl font-bold mb-3">Quadras</h1>
                 <p>Escolha a quadra que você preferir e divirta-se!</p>
