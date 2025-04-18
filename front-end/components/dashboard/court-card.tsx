@@ -35,7 +35,10 @@ export default function CourtCard({ id, name, location, available, role }: Court
                 </div>
             }
 
-            <button className={`w-2/3 bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer ${!available ? "hidden" : ""}`} onClick={() => alert("Funcionalidade em desenvolvimento")}>Reservar</button>
+            {
+                available && <button className={`w-2/3 bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer ${!available ? "hidden" : ""}`} onClick={() => alert("Funcionalidade em desenvolvimento")}>Reservar</button>
+            }
+
         </div>
     )
 }
