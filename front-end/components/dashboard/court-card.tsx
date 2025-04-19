@@ -40,20 +40,20 @@ export default function CourtCard({ id, name, location, available, role }: Court
             {
                 role === "admin" &&
                 <div className={`flex flex-col ${role === "admin" ? "" : "hidden"} `}>
-                    <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `} onClick={() => handleAvailableChange(id)}>Alterar Disponibilidade</button>
+                    <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer hover:bg-[#4b6f4b] transition duration-300`} onClick={() => handleAvailableChange(id)}>Alterar Disponibilidade</button>
                     
                     <div className="w-full flex flex-row justify-between gap-1.5">
                         <Link href={`/court/edit/${id}`} className="w-1/2">
-                            <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `}>Editar</button>
+                            <button className={`w-full bg-[#bebebe] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer  hover:bg-[#4b6f4b] transition duration-300`}>Editar</button>
                         </Link>
-                        <button className={`w-1/2 bg-[#EC7575] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer `} onClick={() => handleRemoveCourt(id)}>Excluir</button>
+                        <button className={`w-1/2 bg-[#EC7575] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer  hover:bg-[#ec130b] transition duration-300`} onClick={() => handleRemoveCourt(id)}>Excluir</button>
                     </div>
 
                 </div>
             }
 
             {
-                available && <button className={`w-2/3 bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer ${!available ? "hidden" : ""}`} onClick={() => alert("Funcionalidade em desenvolvimento")}>Reservar</button>
+                available && <button className={`w-2/3 bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer ${!available ? "hidden" : ""} hover:bg-[#4b6f4b] transition duration-300`} onClick={() => alert("Funcionalidade em desenvolvimento")}>Reservar</button>
             }
 
         </div>

@@ -16,7 +16,7 @@ export default function Login() {
                         
                             <LoginForm/>
 
-                            <p>Não possui conta? <Link href={"/signup"} className="font-bold text-[#629764]">Cadastre-se</Link></p>
+                            <p>Não possui conta? <Link href={"/signup"} className="font-bold text-[#629764] underline">Cadastre-se</Link></p>
                         </div>
                     </div>
                 </div>

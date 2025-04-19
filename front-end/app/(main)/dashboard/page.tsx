@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { findAllCourts } from "@/lib/dashboard";
 import CourtCard from "@/components/dashboard/court-card";
 import Link from "next/link";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 interface DecodedToken {
     name: string;
@@ -75,24 +76,24 @@ export default function Dashboard() {
                 <p>Escolha a quadra que você preferir e divirta-se!</p>
 
                 <div className="flex flex-row justify-between">
-                    <div className="flex items-center gap-2 mt-4">
+                    <div className="flex items-center mt-4">
                         <input
                             type="text"
                             placeholder="Digite o nome da quadra..."
-                            className="border border-gray-300 px-4 py-2 rounded-md w-full max-w-sm"
+                            className="border border-gray-300 px-4 py-2 rounded-l-md w-96 max-w-sm"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <button
                             onClick={handleSearch}
-                            className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
+                            className="bg-[#629764] text-white px-4 py-2 rounded-r-md hover:bg-[#4b6f4b] transition duration-300 cursor-pointer"
                         >
-                            Pesquisar
+                            <MagnifyingGlassIcon className="w-6 h-6" />
                         </button>
                     </div>
 
                     <Link href={"/court/create"} className={`${role === "admin" ? "" : "hidden"}`}>
-                        <button className="bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer">Criar Quadra</button>
+                        <button className="bg-[#629764] text-white font-bold py-2 px-4 rounded-md mt-4 cursor-pointer  hover:bg-[#4b6f4b] transition duration-300">Criar Quadra</button>
                     </Link>
 
                 </div>
@@ -104,12 +105,12 @@ export default function Dashboard() {
                         onClick={() => setShowAvailableOnly((prev) => !prev)}
                         className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${
                         showAvailableOnly ? 'bg-green-600' : 'bg-gray-300'
-                        }`}
+                        } hover: cursor-pointer`}
                     >
                         <div
                             className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
                                 showAvailableOnly ? 'translate-x-6' : 'translate-x-0'
-                            }`}
+                            } hover: cursor-pointer`}
                         ></div>
                     </button>
                 </div>

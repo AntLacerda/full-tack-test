@@ -16,7 +16,7 @@ export default function Signup() {
                             
                             <SignUpForm/>
                             
-                            <p>Já possui conta? <Link href={"/login"} className="font-bold text-[#629764]">Clique aqui</Link></p>
+                            <p>Já possui conta? <Link href={"/login"} className="font-bold text-[#629764] underline">Clique aqui</Link></p>
                         </div>
                     </div>
                 </div>

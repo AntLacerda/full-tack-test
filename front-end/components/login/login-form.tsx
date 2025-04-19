@@ -53,7 +53,7 @@ export default function LoginForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center items-center w-full h-full">
             {
                 feedbackMessage && (
-                    <div className={`absolute top-10 left-10 w-fit p-4 pr-6 rounded-md text-black border-r-8 bg-white ${feedbackType === "sucess" ? "border-green-500" : "border-red-500"}`}>
+                    <div className={`absolute top-10 left-10 w-fit p-4 pr-6 rounded-md text-black border-l-8 bg-white ${feedbackType === "sucess" ? "border-green-500" : "border-red-500"}`}>
                         <div className="flex flex-row items-center gap-2">
                             {feedbackType === "sucess" ? <CheckCircleIcon className="w-6 h-6 text-[#629764]" /> : <XCircleIcon className="w-6 h-6 text-[#FF0000]" />}
                             {feedbackMessage}
@@ -97,7 +97,7 @@ export default function LoginForm() {
         
             </div>
 
-            <button type="submit" className="bg-[#629764] w-full text-white rounded-md p-2 mt-3 font-bold mb-1.5 hover:cursor-pointer" disabled={isSubmitting}>{isSubmitting ? "Entrando..." : "Entrar"}</button>
+            <button type="submit" className="bg-[#629764] w-full text-white rounded-md p-2 mt-3 font-bold mb-1.5 hover:cursor-pointer hover:bg-[#4b6f4b] transition duration-300" disabled={isSubmitting} >{isSubmitting ? "Entrando..." : "Entrar"}</button>
         </form>
     )
 }

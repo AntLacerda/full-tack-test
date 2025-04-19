@@ -92,7 +92,7 @@ export default function CreateCourtForm() {
                 <label htmlFor="checkbox">Cadastrar como disponível?</label>
             </div>
 
-            <button type="submit" className="bg-[#629764] w-full text-white rounded-md p-2 mt-3 font-bold mb-1.5 hover:cursor-pointer" disabled={isSubmitting}>{isSubmitting ? "Cadastrando..." : "Cadastrar"}</button>
+            <button type="submit" className="bg-[#629764] w-full text-white rounded-md p-2 mt-3 font-bold mb-1.5 cursor-pointer hover:bg-[#4b6f4b] transition duration-300" disabled={isSubmitting}>{isSubmitting ? "Cadastrando..." : "Cadastrar"}</button>
         </form>
     )
 }
