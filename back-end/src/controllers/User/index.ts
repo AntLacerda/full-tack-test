@@ -11,7 +11,7 @@ const createAdminUser = async (req: Request, res: Response): Promise<any> => {
         return res.status(201).json(userAdmin);
     } catch (error) {
         if(error instanceof AppError) {
-            return res.status(error.statusCode).json({message: {message: error.message}});
+            return res.status(error.statusCode).json({message: error.message});
         }
 
         console.error("Error on create admin user: ", error);
