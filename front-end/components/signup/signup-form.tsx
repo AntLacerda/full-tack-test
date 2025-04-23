@@ -134,7 +134,7 @@ export default function SignUpForm() {
 
             <div className="flex flex-row items-center gap-2 mt-1.5">
                 <input type="checkbox" id="checkbox" className="w-4 h-4" {...register("adminAccount")}/>
-                <label htmlFor="checkbox">Cadastrar como admninistrador?</label>
+                <label htmlFor="checkbox">Cadastrar como administrador?</label>
             </div>
 
             <button type="submit" className="bg-[#629764] w-full text-white rounded-md p-2 mt-3 font-bold mb-1.5 hover:cursor-pointer hover:bg-[#4b6f4b] transition duration-300" disabled={isSubmitting}>{isSubmitting ? "Cadastrando..." : "Cadastrar"}</button>
